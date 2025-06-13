@@ -195,11 +195,23 @@ Build the container image, I chose debian, to stay consistent and because I know
 podman build -t simpletasks-dev:latest .
 ```
 
+And finally you can run the Container:
+
+```bash
+p run --network=host --name simpletasks simpletasks-dev
+```
+
+Try to go to http://localhost:3000 to reach the web-app.
+
+
+**Notes:**
 I had a lot of troubles with the official node images and to build on top of them. So i opted for debian instead.
 
 Also be sure to give the machine that builds the server enough memory, I ran into many Out-Of-Memory errors during build.
 
 Resulting Image will be huge, around 1.7GB!
+
+
 
 ---
 
