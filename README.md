@@ -197,7 +197,21 @@ podman build -t simpletasks-dev:latest .
 
 I had a lot of troubles with the official node images and to build on top of them. So i opted for debian instead.
 
+Also be sure to give the machine that builds the server enough memory, I ran into many Out-Of-Memory errors during build.
+
+Resulting Image will be huge, around 1.7GB!
+
 ---
 
 **Original README** can be found at [here](ORIG-README.md)
 
+
+
+---
+
+Sources:
+- https://docs.meteor.com/cli
+- https://forums.meteor.com
+- https://docs.docker.com/engine/install/debian/
+- https://docs.podman.io/en/latest/
+- 
