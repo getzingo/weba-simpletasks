@@ -120,10 +120,14 @@ ssh connection is essential.
 ### Create Atlas Account
 
 1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and register an account
-2. Create a Cluster
-3. Be sure to pick free tier
-4. Create user and password
+
+2. ![Create a Cluster](README-Assets/atlas1.png)
+
+3. ![Be sure to pick free tier](README-Assets/atlas2.png)
+4. ![Create user and password](README-Assets/atlas3.png)
 5. Add public IP of the ec2 instance to 'Network Access List'
+
+Note the mongodb Url, it starts with `mongodb+srv://<user>:<pw>@url.mongodb.net/?...`
 
 
 ### Deploy with Meteor Up
