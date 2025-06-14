@@ -121,10 +121,10 @@ ssh connection is essential.
 
 1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and register an account
 
-2. ![Create a Cluster](README-Assets/atlas1.png)
+2. Create a Cluster: ![atlas1](README-Assets/atlas1.png)
 
-3. ![Be sure to pick free tier](README-Assets/atlas2.png)
-4. ![Create user and password](README-Assets/atlas3.png)
+3. Be sure to pick free tier: ![atlas2](README-Assets/atlas2.png)
+4. Create user and password: ![atlas3](README-Assets/atlas3.png)
 5. Add public IP of the ec2 instance to 'Network Access List'
 
 Note the mongodb Url, it starts with `mongodb+srv://<user>:<pw>@url.mongodb.net/?...`
