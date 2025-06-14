@@ -198,10 +198,20 @@ podman build -t simpletasks-dev:latest .
 And finally you can run the Container:
 
 ```bash
-p run --network=host --name simpletasks simpletasks-dev
+docker run --network=host --name simpletasks simpletasks-dev
 ```
 
 Try to go to http://localhost:3000 to reach the web-app.
+
+## Environment variables
+
+Used like `-e MY_VAR=MY_VALUE` at command line or `ENV MY_VAR=MY_VALUE` in Dockerfile.
+
+Most interesting ones (from meteor docs):
+- **PORT**: Port the webapp gets exposed to
+- **MONGO_URL**: Url the DB will be reached on
+- **ROOT_URL**: Webapp Url
+- **BIND_IP**: Bind the webapp to a certain IP
 
 
 **Notes:**

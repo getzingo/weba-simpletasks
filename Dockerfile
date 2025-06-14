@@ -2,6 +2,7 @@ FROM debian:bookworm-slim
 
 # From Metor docs
 ENV PORT=3000
+ENV MONGO_URL="mongodb://user:password@myserver.com:10139"
 
 # Install build dependencies
 RUN apt-get update \
