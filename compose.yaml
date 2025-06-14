@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - simpletasks-net
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://root:password@mongo:27017/
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - simpletasks-net
+
+networks:
+  simpletasks-net: {}

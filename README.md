@@ -190,18 +190,62 @@ Cd into the folder:
 cd weba-simpletasks
 ```
 
-Build the container image, I chose debian, to stay consistent and because I know it the best:
+You can build the container image, I chose debian as base image, to stay consistent and because I know it the best:
+
 ```bash
 podman build -t simpletasks-dev:latest .
 ```
 
-And finally you can run the Container:
+And finally you can run the container with the prepared Compose file:
 
 ```bash
-docker run --network=host --name simpletasks simpletasks-dev
+# Inside the directory of the repo:
+docker compose up -d
 ```
 
-Try to go to http://localhost:3000 to reach the web-app.
+This will pull the mongodb container image from a public registry, but build the simpletasks-app locally on top of the debian container image. I know it is good practice to split up the Dockerfile into a sacrificial build image and then just move the compiled files over, but I couldn't figure that part out.
+Now we are left with a heavyweight 3.87 GB container image. Not very ideal.
+
+The Compose file explained:
+```yaml
+services:
+  # name of the container that runs the simpletasks app
+  app:
+    # instead of image, directive to build with
+    # context provided of the Dockerfile
+    build: .
+    # Ports to be exposed on the host
+    ports:
+      - "3000:3000"
+    # Connects all containers in the same network and does some dns magic
+    # so that containers can be reached over the network by their names
+    networks:
+      - simpletasks-net
+    # Same as 'ENV ...' in Dockerfile, but overrides them when set again
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://root:password@mongo:27017/
+    # Directive what happens when app crashes or the host gets rebooted
+    restart: always
+  # name of the mongodb contaienr
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      # definately change this to secret values, should be the same as in app: environment
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - simpletasks-net
+# network defined
+networks:
+  simpletasks-net: {}
+```
+
+Probably a good idea to attach volumes for persistent data.
+
+
+Finally you can go to http://localhost:3000 to reach the web-app.
 
 ## Environment variables
 
