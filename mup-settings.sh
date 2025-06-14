@@ -107,8 +107,7 @@ module.exports = {
   proxy: {
     domains: "$URL.weba.ditm.at",
     ssl: {
-      letsEncryptEmail: "$LETSENCRYPT_MAIL",
-      forceSSL: true
+      letsEncryptEmail: "$LETSENCRYPT_MAIL"
     }
   },
 

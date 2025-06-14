@@ -40,7 +40,7 @@ Also includes changes of the navbar-logo and changes of the colors of the gradie
 
 These changes are:
 
-```jsx
+```js
 //// ui/pages/tasks/tasks-page.jsx
 // -
 bgGradient="linear(to-l, #675AAA, #4399E1)"
@@ -65,9 +65,9 @@ bgGradient="linear(to-l, #B54343, #8566B3)"
 Simple Tasks
 // +
  /\/\
-````
+```
 
-```bash
+```sh
 # As standard user
 git clone https://github.com/getzingo/weba-simpletasks.git
 cd weba-simpletasks
@@ -87,7 +87,7 @@ meteor npm install
 meteor --port $(hostname -I | awk '{print $1}'):5000
 ```
 
-This exposes the app to your VM's primary IP so it’s accessible externally; if running locally, use --port 5000.
+This exposes the app to your VM's primary IP so it’s accessible externally; if running locally, use --port 5000 and go to http://localhost:5000.
 
 If there is no firewall in place, you should be able to reach the simpletasks app at port 5000.
 
@@ -119,17 +119,17 @@ ssh connection is essential.
 
 ### Create Atlas Account
 
-- Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and register an account
-- Create a Cluster
-- Be sure to pick free tier
-- Create user and password
-- Add public IP of the ec2 instance to 'Network Access List'
+1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and register an account
+2. Create a Cluster
+3. Be sure to pick free tier
+4. Create user and password
+5. Add public IP of the ec2 instance to 'Network Access List'
 
 
 ### Deploy with Meteor Up
 
 Meteor Up prepares your JS app, packages it into a docker container, as to make dependencies easier, and manages the deployment, even offering modular extensions.
-We will be using the proxy module for letsencrypt and the hooks module, to automatically generate a nameserver entry.
+We will be using the proxy module for letsencrypt and the hooks module, to automatically generate a nameserver entry via the courses dns registry service.
 
 To do that, you first need a few things:
 1. Ssh privkey of the remote ec2 instance
@@ -142,10 +142,10 @@ To do that, you first need a few things:
 #### Install Meteor Up
 
 ```bash
-# still in weba-simpletasks directory on the local machine
+# still in weba-simpletasks directory on the local machine, install meteor up
 npm install -g mup
 
-# This created a .deploy directory with all infos
+# This creates a .deploy directory with all infos
 mup init
 ```
 
@@ -168,7 +168,10 @@ mup setup
 mup deploy
 ```
 
+*Note: This took a very long time, about 10min*
+
 Now you can try to see if the app is reachable at https://<chosen url>.weba.ditm.at
+
 
 #### Troubleshooting
 
@@ -199,7 +202,7 @@ podman build -t simpletasks-dev:latest .
 And finally you can run the container with the prepared Compose file:
 
 ```bash
-# Inside the directory of the repo:
+# Inside the directory of the repo (the -d is for detached mode):
 docker compose up -d
 ```
 
@@ -242,6 +245,8 @@ networks:
   simpletasks-net: {}
 ```
 
+To shut your stack down execute `docker compose down`, to eradicate all data `docker compose down -v`.
+
 Probably a good idea to attach volumes for persistent data.
 
 
@@ -263,8 +268,6 @@ I had a lot of troubles with the official node images and to build on top of the
 
 Also be sure to give the machine that builds the server enough memory, I ran into many Out-Of-Memory errors during build.
 
-Resulting Image will be huge, around 1.7GB!
-
 
 
 ---
@@ -280,4 +283,4 @@ Sources:
 - https://forums.meteor.com
 - https://docs.docker.com/engine/install/debian/
 - https://docs.podman.io/en/latest/
-- 
+- https://docs.docker.com/reference/compose-file/
